@@ -3,70 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACK WORLD SMS Sender</title>
+    <title>BLACK WORLD | SMS Sender</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap');
         
         :root {
-            --primary: #6c63ff;
-            --dark: #1e1e2c;
-            --light: #f5f5f7;
-            --success: #28a745;
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #0f0f1a;
+            --light: rgba(255,255,255,0.9);
+            --accent: #00f2fe;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+            color: white;
             overflow-x: hidden;
+            background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #16213e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         header {
-            background: linear-gradient(135deg, var(--dark), #2d2d42);
-            color: white;
-            padding: 20px 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
             animation: fadeInDown 1s ease;
         }
         
         .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary), #9d4edd);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
         }
         
         .tagline {
-            font-size: 1rem;
+            font-size: 1.2rem;
             opacity: 0.8;
+            margin-bottom: 2rem;
         }
         
         .main {
-            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
         
         .card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            background: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transform: translateY(20px);
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
@@ -74,54 +98,83 @@
         }
         
         .card h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
             font-size: 1.8rem;
+            letter-spacing: 1px;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
         }
         
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             font-size: 1rem;
+            color: white;
             transition: all 0.3s ease;
         }
         
         .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
             outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.2);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), #9d4edd);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 12px 30px;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 0;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
         }
         
         .btn:active {
@@ -129,46 +182,63 @@
         }
         
         .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         
         .success {
-            background-color: rgba(40, 167, 69, 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            color: #28a745;
         }
         
         .error {
-            background-color: rgba(220, 53, 69, 0.1);
-            border: 1px solid #dc3545;
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.5);
             color: #dc3545;
         }
         
-        .social-section {
-            text-align: center;
-            padding: 30px 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .about-section {
+            background: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transform: translateY(20px);
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
             animation-delay: 0.6s;
         }
         
-        .social-section h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
+        .about-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .about-section p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .social-section {
+            text-align: center;
+            margin-top: 2rem;
         }
         
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
         
         .social-icon {
@@ -178,37 +248,46 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #9d4edd);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             font-size: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .social-icon:hover::after {
+            left: 0;
         }
         
         .social-icon:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
         }
         
         footer {
-            background: var(--dark);
-            color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
         }
         
         .developer-info {
-            margin-bottom: 15px;
-        }
-        
-        .developer-info p {
-            margin-bottom: 5px;
-        }
-        
-        .copyright {
-            opacity: 0.7;
-            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
         
         /* Animations */
@@ -234,44 +313,47 @@
             }
         }
         
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Responsive */
         @media (max-width: 768px) {
             .logo {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
-            .card {
-                padding: 20px;
+            .card, .about-section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 class="logo">BLACK WORLD</h1>
-            <p class="tagline">Premium SMS Sending Service</p>
-        </div>
-    </header>
+    <div class="particles" id="particles-js"></div>
     
-    <main class="main">
-        <div class="container">
+    <div class="container">
+        <header>
+            <h1 class="logo">BLACK WORLD</h1>
+            <p class="tagline">Premium SMS Solutions & Digital Innovation</p>
+        </header>
+        
+        <main class="main">
             <div class="card">
                 <h2>SMS Sender</h2>
                 <form id="smsForm">
@@ -283,93 +365,243 @@
                         <label for="amount">Number of SMS to Send:</label>
                         <input type="number" id="amount" class="form-control" placeholder="e.g. 10" required min="1">
                     </div>
-                    <button type="submit" class="btn pulse-animation">Send SMS</button>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Send SMS
+                    </button>
                 </form>
                 <div id="result" class="result"></div>
             </div>
             
-            <div class="social-section">
-                <h3>Connect With Us</h3>
-                <div class="social-icons">
-                    <a href="https://t.me/blackworldofficial" class="social-icon" target="_blank">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://wa.me/923058190234" class="social-icon" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="https://whatsapp.com/channel/0029VbB0uxI2kNFsUSvDdG0f" class="social-icon" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+            <div class="about-section">
+                <h2>About BLACK WORLD</h2>
+                <p>BLACK WORLD is a digital identity focused on delivering cutting-edge solutions in web development, content creation, and community management. We thrive on innovation and aim to build a strong, supportive community in the digital space.</p>
+                <p>Our projects are built with passion and precision, combining abstract digital art with functional technology to create unique experiences.</p>
+                
+                <div class="social-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://t.me/blackworldofficial" class="social-icon" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://wa.me/923058190234" class="social-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029VbB0uxI2kNFsUSvDdG0f" class="social-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-    
-    <footer>
-        <div class="container">
+        </main>
+        
+        <footer>
             <div class="developer-info">
                 <p><strong>Developer:</strong> BLACK WORLD</p>
-                <p><strong>Contact:</strong> <a href="https://wa.me/923058190234" style="color: var(--primary);">WhatsApp</a> | <a href="https://t.me/blackworldofficial" style="color: var(--primary);">Telegram</a></p>
+                <p><strong>Contact:</strong> 
+                    <a href="https://wa.me/923058190234" style="color: var(--accent);">WhatsApp</a> | 
+                    <a href="https://t.me/blackworldofficial" style="color: var(--accent);">Telegram</a>
+                </p>
             </div>
             <div class="copyright">
                 &copy; <span id="year"></span> BLACK WORLD. All rights reserved.
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year in footer
+            // Set current year
             document.getElementById('year').textContent = new Date().getFullYear();
             
-            // Form submission
-            document.getElementById('smsForm').addEventListener('submit', function(e) {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00f2fe"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#6a11cb",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // SMS Form Handling
+            document.getElementById('smsForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const number = document.getElementById('number').value.trim();
                 const amount = document.getElementById('amount').value.trim();
                 const resultDiv = document.getElementById('result');
+                const submitBtn = document.querySelector('#smsForm button');
+                const originalBtnText = submitBtn.innerHTML;
                 
-                // Validate number
+                // Validate inputs
                 if(!number.startsWith('92') || number.length < 10) {
-                    resultDiv.textContent = "Please enter a valid Pakistani number starting with 92";
-                    resultDiv.className = "result error";
-                    resultDiv.style.display = "block";
+                    showResult("Please enter a valid Pakistani number starting with 92", "error");
                     return;
                 }
                 
-                // Validate amount
-                if(amount < 1) {
-                    resultDiv.textContent = "Amount must be at least 1";
-                    resultDiv.className = "result error";
-                    resultDiv.style.display = "block";
+                if(amount < 1 || isNaN(amount)) {
+                    showResult("Amount must be at least 1", "error");
                     return;
                 }
                 
-                // Show loading
-                resultDiv.textContent = "Sending SMS... Please wait";
-                resultDiv.className = "result";
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="loading"></span> Sending...`;
+                
+                try {
+                    // Call API with timeout
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000);
+                    
+                    const apiUrl = `https://famofcfallxd.serv00.net/apis/api.php?number=${number}&amount=${amount}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        signal: controller.signal,
+                        mode: 'cors'
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if(!response.ok) {
+                        throw new Error(`API responded with status ${response.status}`);
+                    }
+                    
+                    const data = await response.text();
+                    
+                    if(data.toLowerCase().includes("error") || data.toLowerCase().includes("fail")) {
+                        throw new Error(data);
+                    }
+                    
+                    showResult(`Success! ${amount} SMS sent to ${number}`, "success");
+                } catch (error) {
+                    console.error("Error:", error);
+                    
+                    let errorMessage = "Failed to send SMS";
+                    
+                    if(error.name === "AbortError") {
+                        errorMessage = "Request timed out. Please try again later.";
+                    } else if(error.message.includes("Failed to fetch")) {
+                        errorMessage = "Network error. Please check your connection.";
+                    } else if(error.message.includes("API responded")) {
+                        errorMessage = "Server error. Please try again later.";
+                    } else {
+                        errorMessage = error.message || errorMessage;
+                    }
+                showResult(errorMessage, "error");
+                } finally {
+                    // Restore button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                }
+            });
+            
+            function showResult(message, type) {
+                const resultDiv = document.getElementById('result');
+                resultDiv.textContent = message;
+                resultDiv.className = `result ${type}`;
                 resultDiv.style.display = "block";
                 
-                // Call API
-                const apiUrl = `https://famofcfallxd.serv00.net/apis/api.php?number=${number}&amount=${amount}`;
-                
-                fetch(apiUrl)
-                    .then(response => {
-                        if(!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        resultDiv.textContent = `SMS sent successfully to ${number}. ${amount} messages dispatched.`;
-                        resultDiv.className = "result success";
-                    })
-                    .catch(error => {
-                        resultDiv.textContent = `Error: ${error.message}`;
-                        resultDiv.className = "result error";
-                    });
-            });
+                // Scroll to result
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         });
     </script>
 </body>
